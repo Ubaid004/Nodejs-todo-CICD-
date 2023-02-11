@@ -1,5 +1,4 @@
 pipeline{
-    agent{ label"Nodejs agent"}
     environment{
         VERSION = "${env.BUILD_ID}"
 
