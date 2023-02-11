@@ -21,18 +21,9 @@ pipeline{
                         '''             
                 }
             }
-            step("checks"){
-                agent {
-                    docker {
-                        image                 'node:12.2.0-alpine'
-                        registryUrl           'https://registry-1.docker.io'
-                        registryCredentialsId 'dockerhub'
-                    }
-                }
-        
-            }
         }
         
+
 
     }
 }
