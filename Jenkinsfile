@@ -5,12 +5,11 @@ pipeline{
 
     }
     stages{
-         stage("Nodejs-cicd check"){
-            agent {
-                docker {
-                    image 'node:12.2.0-alpine'
-                }
+        stage("pull"){
+            steps{
+                git url: 'https://github.com/Ubaid004/Nodejs-todo-CICD-.git', branch: 'dev'
             }
+        }
         stage("build and push"){
             steps{
                 withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub-passwd')]) {
