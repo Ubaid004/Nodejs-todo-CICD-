@@ -1,5 +1,5 @@
 pipeline{
-    agent any
+    agent{ label"Nodejs agent"}
     environment{
         VERSION = "${env.BUILD_ID}"
 
@@ -21,17 +21,18 @@ pipeline{
                         '''             
                 }
             }
-        }
-        stage("credentials"){
-            agent {
-                docker {
-                    image                 'node:12.2.0-alpine'
-                    registryUrl           'https://registry-1.docker.io'
-                    registryCredentialsId 'dockerhub'
+            step("checks"){
+                agent {
+                    docker {
+                        image                 'node:12.2.0-alpine'
+                        registryUrl           'https://registry-1.docker.io'
+                        registryCredentialsId 'dockerhub'
+                    }
                 }
-            }
         
+            }
         }
+        
 
     }
 }
