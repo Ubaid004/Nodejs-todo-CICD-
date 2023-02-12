@@ -12,10 +12,10 @@ pipeline{
         }
         stage("build and push"){
             steps{
-                withCredentials([string(credentialsId: 'dockerhub-passwd', variable: 'dockerhub-passwd')]) {
+                withCredentials([string(string(credentialsId: 'dockerhub', variable: 'dockerhub-stdin')]) {
                         sh '''
                            docker build . -t nodejs-todo-cicd:${VERSION}
-                           docker login -u Ubaid004 -p $dockerhub-passwd
+                           docker login -u Ubaid004 -p $dockerhub-stdin
                            docker push nodejs-todo-cicd:${VERSION}
                            docker rmi nodejs-todo-cicd:${VERSION}
                         '''             
