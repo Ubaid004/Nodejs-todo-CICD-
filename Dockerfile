@@ -9,8 +9,6 @@ RUN npm install
 
 RUN npm run test
 
-RUN chmod 777 /var/run/docker.sock 
-
 EXPOSE 8000
 
 CMD ["node","app.js"]
