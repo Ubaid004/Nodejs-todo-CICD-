@@ -21,7 +21,13 @@ pipeline{
                 }
             }
         }
-        
+        stage("my stage error code 1"){
+            steps{
+                sh ''' @echo off
+                        return_1_if_success.exe   // command which returns 1 in case of success, 0 otherwise
+                        IF %ERRORLEVEL% EQU 1 (exit /B 0) ELSE (exit /B 1)'''
+            }
+        }
     }
 }
 
