@@ -14,6 +14,7 @@ pipeline{
             steps{
                 withDockerRegistry(credentialsId: 'dockerhubid', url: 'https://registry.hub.docker.com'){
                     sh '''
+                        set +e
                         docker build . -t nodejs-todo-cicd:${VERSION}
                         docker push nodejs-todo-cicd:${VERSION}
                         docker rmi nodejs-todo-cicd:${VERSION}
@@ -21,13 +22,7 @@ pipeline{
                 }
             }
         }
-        stage("my stage error code 1"){
-            steps{
-                sh ''' @echo off
-                        return_1_if_success.exe   // command which returns 1 in case of success, 0 otherwise
-                        IF %$?% EQU 1 (exit /B 0) ELSE (exit /B 1)'''
-            }
-        }
+        
     }
 }
 
