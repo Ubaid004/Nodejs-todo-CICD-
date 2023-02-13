@@ -14,7 +14,6 @@ pipeline{
             steps{
                 withDockerRegistry(credentialsId: 'dockerhubid', url: 'https://registry.hub.docker.com'){
                     sh '''
-                       set +e
                        docker build . -t nodejs-todo-cicd:${VERSION}
                        docker tag nodejs-todo-cicd:${VERSION} ubaid004/nodejs-todo-cicd:${VERSION}
                        docker push ubaid004/nodejs-todo-cicd:${VERSION}
