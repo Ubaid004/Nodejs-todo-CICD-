@@ -17,7 +17,7 @@ pipeline{
                         set +e
                         docker build . -t nodejs-todo-cicd:${VERSION}
                         docker push nodejs-todo-cicd:${VERSION}
-                        docker rmi nodejs-todo-cicd:${VERSION}
+
                         '''             
                 }
             }
