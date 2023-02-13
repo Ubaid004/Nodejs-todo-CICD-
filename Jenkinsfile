@@ -14,11 +14,11 @@ pipeline{
             steps{
                 withDockerRegistry(credentialsId: 'dockerhubid', url: 'https://registry.hub.docker.com'){
                     sh '''
-                        set +e
-                        docker build . -t nodejs-todo-cicd:${VERSION}
-                        docker push nodejs-todo-cicd:${VERSION}
+                       set +e
+                       docker build . -t nodejs-todo-cicd:${VERSION}
+                       docker push nodejs-todo-cicd:${VERSION}
 
-                        '''             
+                    '''             
                 }
             }
         }
