@@ -17,7 +17,7 @@ pipeline{
                        set +e 
                        docker build . -t nodejs-todo-cicd:${VERSION}
                        docker tag first-image ubaid004/nodejs-todo-cicd:${VERSION}
-                       docker push ubaid004/nodejs-todo-cicd:${VERSION}:first-image
+                       docker push ubaid004/nodejs-todo-cicd:${VERSION}
 
                     '''             
                 }
