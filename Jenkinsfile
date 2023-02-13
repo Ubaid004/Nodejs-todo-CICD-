@@ -12,7 +12,7 @@ pipeline{
         }
         stage("build and push"){
             steps{
-                withDockerRegistry(credentialsId: 'dockerhubid', url: ''https://registry.hub.docker.com'){
+                withDockerRegistry(credentialsId: 'dockerhubid', url: 'https://registry.hub.docker.com'){
                     sh '''
                         docker build . -t nodejs-todo-cicd:${VERSION}
                         docker push nodejs-todo-cicd:${VERSION}
