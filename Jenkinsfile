@@ -1,9 +1,5 @@
 pipeline{
     agent any
-    environment{
-        VERSION = "${env.BUILD_ID}"
-
-    }
     stages{
         stage("pull"){
             steps{
@@ -15,9 +11,9 @@ pipeline{
                 withCredentials([string(credentialsId: 'dockerhubid', variable: 'dockerhubCredetials')]) {
                     sh '''
                        set +e 
-                       docker build -t nodejs-todo-cicd:${VERSION} .
+                       docker build -t nodejs-todo-cicd .
                        docker login -u ubaid004 -p $dockerhubCredetials
-                       docker push ubaid004/nodejs-todo-cicd:${VERSION}
+                       docker push ubaid004/nodejs-todo-cicd
 
                     '''                          
                 }

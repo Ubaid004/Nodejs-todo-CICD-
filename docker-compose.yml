@@ -3,6 +3,6 @@ version: '3.3'
 
 services:
         web :
-                image : 'nodejs-todo-cicd:${VERSION}'
+                image : 'nodejs-todo-cicd'
                 ports :
                         - "8000:8000"
