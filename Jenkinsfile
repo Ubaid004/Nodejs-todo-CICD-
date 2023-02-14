@@ -19,12 +19,14 @@ pipeline{
         }
         stage("push"){
             steps{
-                withCredentials([string(credentialsId: 'dockerhubid', variable: 'dockerhubCredetials')]){
-                    sh '''
-                       set +e
-                       docker login -u "ubaid004" -p $dockerhubCredetials
-                    '''
-                    DockerImage.push("latest")             
+                script {
+                    withCredentials([string(credentialsId: 'dockerhubid', variable: 'dockerhubCredetials')]){
+                        sh '''
+                            set +e
+                            docker login -u "ubaid004" -p $dockerhubCredetials
+                        '''
+                        DockerImage.push("latest")             
+                    }
                 }
             }
         }
