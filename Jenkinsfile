@@ -16,7 +16,7 @@ pipeline{
                     sh '''
                        set +e 
                        docker rmi nodejs-todo-cicd:${VERSION}
-                       docker build . -t nodejs-todo-cicd:${VERSION}
+                       docker build -t nodejs-todo-cicd:${VERSION} .
                        docker login -u ubaid004 -p $dockerhubCredetials
                        docker push ubaid004/nodejs-todo-cicd:${VERSION}
 
