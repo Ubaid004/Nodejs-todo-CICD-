@@ -5,6 +5,22 @@ pipeline{
 
     }
     stages{
+        stage('Conditional stage') {
+            when {
+                expression {
+                    if(route53 == 'false' ) {
+                        return false
+                    }
+                    else if(route53 == 'true' && all == "Yes" ) {
+                        return false
+                    }
+                    return true
+                }
+            }
+            steps {
+                ...
+            }
+        }
         stage("pull"){
             steps{
                 git url: 'https://github.com/Ubaid004/Nodejs-todo-CICD-.git', branch: 'dev'
