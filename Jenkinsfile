@@ -10,10 +10,16 @@ pipeline{
                 git url: 'https://github.com/Ubaid004/Nodejs-todo-CICD-.git', branch: 'dev'
             }
         }
-        stage("build and push"){
+        stage("build"){
             steps{
-                withCredentials([string(credentialsId: 'dockerhubid', variable: 'dockerhubCredetials')]) {
+                script {
                     DockerImage = docker.build dockerimg
+                }
+            }
+        }
+        stage("push"){
+            steps{
+                withCredentials([string(credentialsId: 'dockerhubid', variable: 'dockerhubCredetials')]){
                     sh '''
                        set +e
                        docker login -u "ubaid004" -p $dockerhubCredetials
@@ -21,7 +27,8 @@ pipeline{
                     DockerImage.push("latest")             
                 }
             }
-        }stage("deploy"){
+        }
+        stage("deploy"){
             steps{
                 sh 'docker-compose down'
                 sh 'docker-compose up -d --force-recreate --no-deps --build web'
