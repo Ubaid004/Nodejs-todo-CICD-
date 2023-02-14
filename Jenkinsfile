@@ -1,5 +1,9 @@
 pipeline{
     agent any
+    environment{
+        dockerimg = "nodejs-todo-cicd"
+
+    }
     stages{
         stage("pull"){
             steps{
@@ -9,17 +13,15 @@ pipeline{
         stage("build and push"){
             steps{
                 withCredentials([string(credentialsId: 'dockerhubid', variable: 'dockerhubCredetials')]) {
+                    DockerImage = docker.build dockerimg
                     sh '''
-                       set +e 
-                       docker build -t nodejs-todo-cicd .
-                       docker login -u ubaid004 -p $dockerhubCredetials
-                       docker push ubaid004/nodejs-todo-cicd
-
-                    '''                          
+                       set +e
+                       docker login -u "ubaid004" -p $dockerhubCredetials
+                    '''
+                    DockerImage.push("latest")             
                 }
             }
-        }
-        stage("deploy"){
+        }stage("deploy"){
             steps{
                 sh 'docker-compose down'
                 sh 'docker-compose up -d --force-recreate --no-deps --build web'
@@ -28,4 +30,5 @@ pipeline{
         
     }
 }
+
 
