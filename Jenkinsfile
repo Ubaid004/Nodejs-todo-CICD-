@@ -1,9 +1,5 @@
 pipeline{
     agent any
-    environment{
-        dockerimg = "nodejs-todo-cicd"
-
-    }
     stages{
         stage("pull"){
             steps{
@@ -13,7 +9,7 @@ pipeline{
         stage("build"){
             steps{
                 script {
-                    DockerImage = docker.build dockerimg
+                    sh 'docker build . -t nodejs-todo-cicd '
                 }
             }
         }
@@ -24,8 +20,10 @@ pipeline{
                         sh '''
                             set +e
                             docker login -u "ubaid004" -p $dockerhubCredetials
+                            docker tag nodejs-todo-cicd ubaid004/nodejs-todo-cicd:nodejs-todo-cicd
+                            docker push ubaid004/nodejs-todo-cicd:nodejs-todo-cicd
                         '''
-                        DockerImage.push("latest")             
+                                
                     }
                 }
             }
