@@ -30,8 +30,7 @@ pipeline{
         }
         stage("deploy"){
             steps{
-                sh 'docker-compose down'
-                sh 'docker-compose up -d --force-recreate --no-deps --build web'
+                sh 'docker-compose down && docker-compose up -d'
             }
         }
         
