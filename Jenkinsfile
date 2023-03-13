@@ -21,7 +21,7 @@ pipeline{
                             set +e
                             docker login -u "ubaid004" -p $dockerhubCredetials
                             docker tag nodejs-todo-cicd ubaid004/nodejs-todo-cicd:nodejs-todo-cicd
-                            docker push ubaid004/nodejs-todo-cicd
+                            docker push ubaid004/nodejs-todo-cicd:nodejs-todo-cicd
                         '''
                                 
                     }
